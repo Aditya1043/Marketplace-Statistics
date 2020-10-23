@@ -25,6 +25,7 @@ import com.example.model.CompanyData;
 import com.example.model.CountSubscribers;
 import com.example.model.First;
 import com.example.model.FirstPart;
+import com.example.model.RevenueData;
 import com.example.model.Second;
 import com.google.gson.Gson;
 
@@ -64,8 +65,10 @@ public class CustomerService {
 	    	    First f=new First();
 				f.setCompany(csvRecord.get("Customer Email Domain"));
 				f.setCustomer(csvRecord.get("Customer Reference ID"));
-				f.setProduct(map.get(csvRecord.get("Product Title")));
+				f.setProduct(map.get(csvRecord.get("Product Title")));			
 				f.setUsage(Integer.valueOf(csvRecord.get("Usage Units")));
+				f.setInstance(csvRecord.get("Instance Type"));
+				f.setRevenue(Double.valueOf(csvRecord.get("Estimated Revenue")));
 				f.setDate(format.parse(d));
 				first.add(f);
 	        }
@@ -338,4 +341,60 @@ public class CustomerService {
 		String res=json.toJson(l);
 		return res;
 	}
+	
+/*	public String usagepercountry(String startDate, String endDate, String product) throws ParseException {
+		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+		Date dd = format.parse(startDate);
+		Date dd1 = format.parse(endDate);
+		List<Object[]> list;
+		if(product.equals("All")) {
+			list=fdto.findAllUsagePerCountry(dd, dd1);
+		} else {
+			list=fdto.findUsagePerCountry(dd, dd1, product);
+		}
+		
+		Gson json=new Gson();
+		String res=json.toJson(list);
+		return res;
+	}
+	
+	public String revenueperproduct(String startDate, String endDate, String product) throws ParseException {
+		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+		List<RevenueData> l=new ArrayList<>();
+		Date dd = format.parse(startDate);
+		Date dd1 = format.parse(endDate);
+		List<Object[]> list=fdto.findRevenuePerProduct(dd, dd1, product);
+		list.forEach(data->{
+			RevenueData rd=new RevenueData();
+			rd.setRevenue((Double)data[0]);
+			rd.setProduct((String)data[1]);
+			l.add(rd);
+		});
+		
+		Gson json=new Gson();
+		String res=json.toJson(l);
+		return res;
+	}
+	
+	public String instanceperproduct(String startDate, String endDate, String product) throws ParseException {
+		Map<String,Map<String,Long>> m=new HashMap<>();
+		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+		Date dd = format.parse(startDate);
+		Date dd1 = format.parse(endDate);
+		List<Object[]> list=fdto.findInstanceDetails(dd, dd1, product);
+		list.forEach(data->{
+			String p = (String)data[0];
+			String i = (String)data[1];
+			Long c = (Long)data[2];
+			if(m.containsKey(p)) {
+				
+			} else {
+				
+			}
+		});
+		
+		Gson json=new Gson();
+		String res=json.toJson(list);
+		return res;
+	}*/
 }

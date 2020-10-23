@@ -18,7 +18,22 @@ public class First {
 	private String product;
 	private int usage;
 	private String company;
+	private String instance;
+	private Double revenue;
 	private Date date;
+	
+	public String getInstance() {
+		return instance;
+	}
+	public void setInstance(String instance) {
+		this.instance = instance;
+	}
+	public Double getRevenue() {
+		return revenue;
+	}
+	public void setRevenue(Double revenue) {
+		this.revenue = revenue;
+	}
 	public String getCustomer() {
 		return customer;
 	}
@@ -49,10 +64,9 @@ public class First {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
 	@Override
 	public String toString() {
 		return "First [id=" + id + ", customer=" + customer + ", product=" + product + ", usage=" + usage + ", company="
-				+ company + ", date=" + date + "]";
+				+ company + ", instance=" + instance + ", revenue=" + revenue + ", date=" + date + "]";
 	}
 }

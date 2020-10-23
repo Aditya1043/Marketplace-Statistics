@@ -7,7 +7,6 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.1.1/jquery-confirm.min.css">
@@ -131,17 +130,121 @@
 		  .sidenav a {font-size: 18px;}
 		}
 	</style>
+	<link rel="stylesheet" href="css/temp.css">
 </head>
-<body>
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-	  <div class="container-fluid">
-		<div class="col-sm-2 chart-container" style="position: relative">
-			<span style="font-size:30px;cursor:pointer;color:white;" onclick="openNav()">&#9776; Charts</span>
-		</div>
-	    <div>
-		<div class="row" >
-		
-			<div class="nav navbar-nav navbar-right padd" style="position: relative">
+
+
+<body  id="page-top">
+	
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-laugh-wink"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Dash Board</div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+     
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Nav Item - New Subscribers -->
+      <li class="nav-item active">
+        <a class="nav-link" href="first.jsp">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Monthly new subscribers</span></a>
+      </li>
+        
+         <!-- Divider -->
+      <hr class="sidebar-divider">
+        
+        <!-- Nav Item - Hours of Deployment -->
+      <li class="nav-item active">
+        <a class="nav-link" href="second.jsp">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Hours of Deployment</span></a>
+      </li>
+        
+         <!-- Divider -->
+      <hr class="sidebar-divider">
+        
+        <!-- Nav Item - Subscribers per product -->
+      <li class="nav-item active">
+        <a class="nav-link" href="fourth.jsp">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Subscribers per Product</span></a>
+      </li>
+        
+         <!-- Divider -->
+      <hr class="sidebar-divider">
+        
+        <!-- Nav Item - Customers per Country -->
+      <li class="nav-item active">
+        <a class="nav-link" href="fifth.jsp">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Usage Units / Country</span></a>
+      </li>
+        
+         <!-- Divider -->
+      <hr class="sidebar-divider">
+        
+        <!-- Nav Item - Deployment hours per customer -->
+      <li class="nav-item active">
+        <a class="nav-link" href="third.jsp">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Deployment hours per Customer</span></a>
+      </li>
+        
+         <!-- Divider -->
+      <hr class="sidebar-divider">
+  
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+          <!-- Topbar Search -->
+            
+            
+            
+<div class="nav navbar-nav navbar-center pad" style="position: relative">
+				<div id="reportrange"
+					style="background: #fff; cursor: pointer;">
+					<i class="fa fa-calendar"></i>&nbsp; 
+					<span></span> <i class="fa fa-caret-down"></i>
+				</div>
+			</div>
+            
+            <div class="nav navbar-nav navbar-right padd" style="position: relative">
 			<span style="color:white">Products : </span><select id="products" onchange="refreshChart(this.value)" style="border: #8dcca9; background-color: #f0f1f2;">
 					<option>All</option>
 					<option>BDM</option>
@@ -150,58 +253,49 @@
 					<option>IICS</option>
 				</select>  
 			</div>
-			
-			<div class="nav navbar-nav navbar-center pad" style="position: relative">
-				<div id="reportrange"
-					style="background: #fff; cursor: pointer;">
-					<i class="fa fa-calendar"></i>&nbsp; 
-					<span></span> <i class="fa fa-caret-down"></i>
-				</div>
-			</div>
-			
-		</div>
-		</div>
-	  </div>
-	</nav>
+        
+
+        </nav>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+       <div class="container-fluid">
 	
-	<div id="mySidenav" class="sidenav">
-	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-	  <a href="http://localhost:8080">Home</a>
-	  <a href="http://localhost:8080/first">Sub/Month</a>
-	  <a href="http://localhost:8080/second">Hours/Product</a>
-	  <a href="http://localhost:8080/third">Hours/Company</a>
-	  <a href="http://localhost:8080/fourth">Sub/Product</a>
-	  <a href="http://localhost:8080/fifth">Sub/Country</a>
-	</div>
+	  <div class="row">
+		<div class="col-sm-12 chart-container" style="position: relative; padding-bottom:5px;">
 	
-	<div id="main">
-	<div class="box effect1">
-		<div class="row" >
-			<div class="col-sm-12 chart-container" style="position: relative">
-			 	<center><h5><b>Total Number of Subscribers</b></h5></center>
-				<center><h5 id="numberOfSubsribers">0</h5></center>		
-			</div>
-		</div>
-		<div class="row">
-			<div id="myChart1div" class="col-sm-12 chart-container" style="position: relative; padding-bottom:5px;">
-				<input id="chartTypeChkBox" type="checkbox" data-toggle="toggle" data-on="Cumulative" data-off="Monthly">
-				<canvas id="myChart1"></canvas>
-			</div>
-		</div>
-	</div>
+           <div class="card border-left-primary shadow h-100 py-2">
+               <div class="card-body">
+                 <div class="row no-gutters align-items-center">
+                   <div class="col mr-2">
+                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total No. of Subscribers</div>
+                     <div id="numberOfSubsribers" class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                   </div>
+                   <div class="col-auto">
+                     <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                   </div>
+                 </div>
+               </div>
+             </div>
+         </div>
+         </div>
+	
+	            <div class="box effect1">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Monthly new Subscribers</h6>
+                  <input id="chartTypeChkBox" type="checkbox" data-toggle="toggle" data-on="Cumulative" data-off="Monthly">
+                </div>
+                <div class="card-body">
+                  <div class="chart-area">
+                    <canvas id="myChart1"></canvas>
+                  </div>
+                </div>
+          </div>
 	</div>
 </body>
 
 <script>
-	function openNav() {
-	  document.getElementById("mySidenav").style.width = "250px";
-	  document.getElementById("main").style.marginLeft = "250px";
-	}
-
-	function closeNav() {
-	  document.getElementById("mySidenav").style.width = "0";
-	  document.getElementById("main").style.marginLeft= "0";
-	}
+	!function(t){"use strict";t("#sidebarToggle, #sidebarToggleTop").on("click",function(o){t("body").toggleClass("sidebar-toggled"),t(".sidebar").toggleClass("toggled"),t(".sidebar").hasClass("toggled")&&t(".sidebar .collapse").collapse("hide")}),t(window).resize(function(){t(window).width()<768&&t(".sidebar .collapse").collapse("hide")}),t("body.fixed-nav .sidebar").on("mousewheel DOMMouseScroll wheel",function(o){if(768<t(window).width()){var e=o.originalEvent,l=e.wheelDelta||-e.detail;this.scrollTop+=30*(l<0?1:-1),o.preventDefault()}}),t(document).on("scroll",function(){100<t(this).scrollTop()?t(".scroll-to-top").fadeIn():t(".scroll-to-top").fadeOut()}),t(document).on("click","a.scroll-to-top",function(o){var e=t(this);t("html, body").stop().animate({scrollTop:t(e.attr("href")).offset().top},1e3,"easeInOutExpo"),o.preventDefault()})}(jQuery);
 	var startDate = "";
 	var endDate = "";
 	var chart1;

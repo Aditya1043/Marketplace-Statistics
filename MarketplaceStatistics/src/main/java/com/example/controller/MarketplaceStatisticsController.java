@@ -94,4 +94,25 @@ public class MarketplaceStatisticsController {
 			@RequestParam(value="fromTime") String endDate, @RequestParam(value="product") String product) throws ParseException {
 		return cs.countryDetails(startDate, endDate, product);
 	}
+	
+	/*@RequestMapping("api/v1/usagepercountry")
+	@ResponseBody
+	public String usagepercountry(Model model, @RequestParam(value="toTime") String startDate,
+			@RequestParam(value="fromTime") String endDate, @RequestParam(value="product") String product) throws ParseException {
+			return cs.usagepercountry(startDate, endDate, product);
+	}
+	
+	@RequestMapping("api/v1/revenueperproduct")
+	@ResponseBody
+	public String revenueperproduct(Model model, @RequestParam(value="toTime") String startDate,
+			@RequestParam(value="fromTime") String endDate, @RequestParam(value="product") String product) throws ParseException {
+			return cs.revenueperproduct(startDate, endDate, product);
+	}
+	
+	@RequestMapping("api/v1/instanceperproduct")
+	@ResponseBody
+	public String instanceperproduct(Model model, @RequestParam(value="toTime") String startDate,
+			@RequestParam(value="fromTime") String endDate, @RequestParam(value="product") String product) throws ParseException {
+			return cs.instanceperproduct(startDate, endDate, product);
+	}*/
 }

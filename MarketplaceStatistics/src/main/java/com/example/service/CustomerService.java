@@ -39,6 +39,7 @@ public class CustomerService {
 	@Autowired
 	private SecondDAO sdto;
 	
+	// function to parse the daily usage excel sheet, process the data and store it in h2 DB
 	public void saveFirst() {
 		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 		Map<String,String> map=new HashMap<String,String>();     
@@ -78,7 +79,7 @@ public class CustomerService {
 		}
 	}
 
-	
+	// created the separate schema for countries for purpose of normalization
 	public void saveFirstPart() {
 		Map<String,String> map=new HashMap<String,String>();    
 		try {
@@ -104,6 +105,7 @@ public class CustomerService {
 		}
 	}
 	
+	// function to parse the customer_subscriber excel sheet, process the data and store it in h2 DB
 	public void saveSecond() {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Map<String,String> map=new HashMap<String,String>();
@@ -163,6 +165,7 @@ public class CustomerService {
 		}
 	}
 	
+	// fetching the data from the DB for Subscribers per product chart, converting it to json format and return
 	public String NumberOfSubscribers(String startDate, String endDate, String product) throws ParseException {
 		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 		List<CountSubscribers> l=new ArrayList<>();
@@ -187,6 +190,7 @@ public class CustomerService {
 		return res;
 	}
 	
+	// fetching data from DB for hours per product chart 
 	public String UsagePerProduct(String startDate, String endDate, String product) throws ParseException {
 		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 		List<CountSubscribers> l=new ArrayList<>();
@@ -211,6 +215,7 @@ public class CustomerService {
 		return res;
 	}
 	
+	//fetching data from DB for Deployment Hours / Customers graph
 	public String CompanyData(String startDate, String endDate, String product) throws ParseException {
 		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 		List<CompanyData> l = new ArrayList<>();
@@ -266,6 +271,7 @@ public class CustomerService {
 		return res;
 	}
 	
+	//fetching total number of subscribers from DB
 	public int countSubscribers(String startDate, String endDate, String product) throws ParseException {
 		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 		Date dd = format.parse(startDate);
@@ -279,7 +285,7 @@ public class CustomerService {
 		return i;
 	}
 		
-		
+	// fetching total number of hours from DB
 	public int countHours(String startDate, String endDate, String product) throws ParseException {
 		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 		Date dd = format.parse(startDate);
@@ -293,6 +299,7 @@ public class CustomerService {
 		return i;
 	}
 	
+	//fetching data from DB for monthly new subscribers 
 	public String customerDetailsByDate(String startDate, String endDate, String product) throws ParseException {
 		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 		List<CountSubscribers> l=new ArrayList<>();
@@ -318,6 +325,7 @@ public class CustomerService {
 		return res;
 	}
 	
+	// fetching data from DB for Usage Units / Country graph
 	public String countryDetails(String startDate, String endDate, String product) throws ParseException {
 		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 		List<CountSubscribers> l=new ArrayList<>();

@@ -46,6 +46,7 @@ public class MarketplaceStatisticsController {
 		return "fifth.jsp";
 	}
 	
+	// ajax request handled for Subscribers per product chart 
 	@RequestMapping("api/v1/subscriberDetails")
 	@ResponseBody
 	public String NumberOfSubscribers(Model model, @RequestParam(value="toTime") String startDate,
@@ -53,6 +54,7 @@ public class MarketplaceStatisticsController {
 		return cs.NumberOfSubscribers(startDate, endDate, product);
 	}
 	
+	//ajax request handled for hours per product chart 
 	@RequestMapping("api/v1/customerDetails")
 	@ResponseBody
 	public String UsagePerProduct(Model model, @RequestParam(value="toTime") String startDate,
@@ -60,6 +62,7 @@ public class MarketplaceStatisticsController {
 		return cs.UsagePerProduct(startDate, endDate, product);
 	}
 	
+	// ajax request handled for Deployment Hours / Customers graph
 	@RequestMapping("api/v1/customerDetailsStacked")
 	@ResponseBody
 	public String CompanyData(Model model, @RequestParam(value="toTime") String startDate,
@@ -67,6 +70,7 @@ public class MarketplaceStatisticsController {
 		return cs.CompanyData(startDate, endDate, product);
 	}
 	
+	// ajax request handled for total number of subscribers
 	@RequestMapping("api/v1/countSubscribers")
 	@ResponseBody
 	public int countSubscribers(Model model, @RequestParam(value="toTime") String startDate,
@@ -74,6 +78,7 @@ public class MarketplaceStatisticsController {
 		return cs.countSubscribers(startDate, endDate, product);
 	}
 	
+	// ajax request handled for total number of hours
 	@RequestMapping("api/v1/countHours")
 	@ResponseBody
 	public int countHours(Model model, @RequestParam(value="toTime") String startDate,
@@ -81,6 +86,7 @@ public class MarketplaceStatisticsController {
 		return cs.countHours(startDate, endDate, product);
 	}
 	
+	// ajax request handled for monthly new subscribers
 	@RequestMapping("api/v1/customerDetailsByDate")
 	@ResponseBody
 	public String customerDetailsByDate(Model model, @RequestParam(value="toTime") String startDate,
@@ -88,6 +94,7 @@ public class MarketplaceStatisticsController {
 		return cs.customerDetailsByDate(startDate, endDate, product);
 	}
 	
+	// ajax request handled for Usage Units / Country graph
 	@RequestMapping("api/v1/country")
 	@ResponseBody
 	public String countryDetails(Model model, @RequestParam(value="toTime") String startDate,

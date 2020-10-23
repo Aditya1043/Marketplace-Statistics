@@ -11,6 +11,8 @@ import com.example.model.First;
 
 @Repository
 public interface FirstDAO extends JpaRepository<First, Integer>{
+	//
+	//
 	 @Query(value = "select sum(c.usage), c.product from First c where "
 	    		+ "c.date BETWEEN ?1 AND ?2 AND product = ?3 group by c.product")
 	 List<Object[]> findUsagePerProduct(Date start, Date end,String product);

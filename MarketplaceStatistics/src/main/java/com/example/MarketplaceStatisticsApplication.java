@@ -12,6 +12,7 @@ public class MarketplaceStatisticsApplication implements CommandLineRunner{
 	@Autowired
 	private CustomerService cs;
 	
+	// run at startup for saving data to DB from the excel sheets
 	@Override
 	public void run(String... args) throws Exception {
 		cs.saveFirst();

@@ -24,7 +24,7 @@
 	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
-	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>	
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>		
 	<style>
 		body{
 	  		background: #e1ecf2;
@@ -78,6 +78,7 @@
 		.sidenav {
 		  height: 100%;
 		  width: 0;
+		  margin-top:50px;
 		  position: fixed;
 		  z-index: 1;
 		  top: 0;
@@ -123,6 +124,7 @@
 		#main {
 		  transition: margin-left .5s;
 		  padding: 16px;
+		  margin-top:50px;
 		}
 		
 		@media screen and (max-height: 450px) {
@@ -132,12 +134,13 @@
 	</style>
 	<link rel="stylesheet" href="css/temp.css">
 </head>
+
 <body  id="page-top">
 	
   <!-- Page Wrapper -->
   <div id="wrapper">
 
-    <!-- Sidebar -->
+         <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
@@ -152,70 +155,96 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
+     <!-- Nav Item - AWS Collapse Menu -->
+     <div class="sidebar-heading">
+        Amazon Web Service
+      </div>
      
-
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Nav Item - New Subscribers -->
-      <li class="nav-item active">
+      <li class="nav-item">
+        <a class="nav-link" href="aws.jsp">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Main AWS Dashboard</span></a>
+      </li>
+       <li class="nav-item">
         <a class="nav-link" href="first.jsp">
           <i class="fas fa-fw fa-chart-area"></i>
-          <span>Monthly new subscribers</span></a>
+          <span>Monthly New Subscribers</span></a>
       </li>
-        
-         <!-- Divider -->
-      <hr class="sidebar-divider">
-        
-        <!-- Nav Item - Hours of Deployment -->
-      <li class="nav-item active">
+       <li class="nav-item">
         <a class="nav-link" href="second.jsp">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Hours of Deployment</span></a>
       </li>
-        
-         <!-- Divider -->
-      <hr class="sidebar-divider">
-        
-        <!-- Nav Item - Subscribers per product -->
-      <li class="nav-item active">
-        <a class="nav-link" href="fourth.jsp">
+       <li class="nav-item">
+        <a class="nav-link" href="third.jsp">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Subscribers per Product</span></a>
       </li>
-        
-         <!-- Divider -->
-      <hr class="sidebar-divider">
-        
-        <!-- Nav Item - Customers per Country -->
-      <li class="nav-item active">
+       <li class="nav-item">
+        <a class="nav-link" href="fourth.jsp">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Usage units/Country</span></a>
+      </li>
+       <li class="nav-item">
         <a class="nav-link" href="fifth.jsp">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Deployment hours per customer</span></a>
+      </li>
+      
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+  
+       <!-- Nav Item - Azure Collapse Menu -->
+       
+             <!-- Nav Item - Dashboard -->
+     <!-- Nav Item - AWS Collapse Menu -->
+     <div class="sidebar-heading">
+        Azure
+      </div>
+     
+      <li class="nav-item">
+        <a class="nav-link" href="azure.jsp">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Main Azure Dashboard</span></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="firstaz.jsp">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Monthly New Subscribers</span></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="secondaz.jsp">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Usage Trends</span></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="thirdaz.jsp">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Usage units / Product</span></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="fourthaz.jsp">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Usage Units / Country</span></a>
       </li>
-        
-         <!-- Divider -->
-      <hr class="sidebar-divider">
-        
-        <!-- Nav Item - Deployment hours per customer -->
-      <li class="nav-item active">
-        <a class="nav-link" href="third.jsp">
+       <li class="nav-item">
+        <a class="nav-link" href="fifthaz.jsp">
           <i class="fas fa-fw fa-chart-area"></i>
-          <span>Deployment hours per Customer</span></a>
+          <span>Visits per Country</span></a>
       </li>
-        
-         <!-- Divider -->
+      
+      
+      <!-- Divider -->
       <hr class="sidebar-divider">
-  
-
+       
+     
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
       </div>
 
     </ul>
-    <!-- End of Sidebar -->
-
+    <!-- End of Sidebar -->    
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
@@ -260,11 +289,11 @@
        <div class="container-fluid">
 	            <div class="box effect1">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">No. of Subscribers per product</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Usage Units / Country</h6>
                 </div>
                 <div class="card-body">
                   <div class="chart-area">
-                    <canvas id="myChart3"></canvas>
+                    <canvas id="myChart4"></canvas>
                   </div>
                 </div>
           </div>
@@ -273,10 +302,11 @@
 </body>
 
 <script>
-	!function(s){"use strict";s("#sidebarToggle, #sidebarToggleTop").on("click",function(e){s("body").toggleClass("sidebar-toggled"),s(".sidebar").toggleClass("toggled"),s(".sidebar").hasClass("toggled")&&s(".sidebar .collapse").collapse("hide")}),s(window).resize(function(){s(window).width()<768&&s(".sidebar .collapse").collapse("hide"),s(window).width()<480&&!s(".sidebar").hasClass("toggled")&&(s("body").addClass("sidebar-toggled"),s(".sidebar").addClass("toggled"),s(".sidebar .collapse").collapse("hide"))}),s("body.fixed-nav .sidebar").on("mousewheel DOMMouseScroll wheel",function(e){if(768<s(window).width()){var o=e.originalEvent,l=o.wheelDelta||-o.detail;this.scrollTop+=30*(l<0?1:-1),e.preventDefault()}}),s(document).on("scroll",function(){100<s(this).scrollTop()?s(".scroll-to-top").fadeIn():s(".scroll-to-top").fadeOut()}),s(document).on("click","a.scroll-to-top",function(e){var o=s(this);s("html, body").stop().animate({scrollTop:s(o.attr("href")).offset().top},1e3,"easeInOutExpo"),e.preventDefault()})}(jQuery);
+!function(s){"use strict";s("#sidebarToggle, #sidebarToggleTop").on("click",function(e){s("body").toggleClass("sidebar-toggled"),s(".sidebar").toggleClass("toggled"),s(".sidebar").hasClass("toggled")&&s(".sidebar .collapse").collapse("hide")}),s(window).resize(function(){s(window).width()<768&&s(".sidebar .collapse").collapse("hide"),s(window).width()<480&&!s(".sidebar").hasClass("toggled")&&(s("body").addClass("sidebar-toggled"),s(".sidebar").addClass("toggled"),s(".sidebar .collapse").collapse("hide"))}),s("body.fixed-nav .sidebar").on("mousewheel DOMMouseScroll wheel",function(e){if(768<s(window).width()){var o=e.originalEvent,l=o.wheelDelta||-o.detail;this.scrollTop+=30*(l<0?1:-1),e.preventDefault()}}),s(document).on("scroll",function(){100<s(this).scrollTop()?s(".scroll-to-top").fadeIn():s(".scroll-to-top").fadeOut()}),s(document).on("click","a.scroll-to-top",function(e){var o=s(this);s("html, body").stop().animate({scrollTop:s(o.attr("href")).offset().top},1e3,"easeInOutExpo"),e.preventDefault()})}(jQuery);
+
 	var startDate = "";
 	var endDate = "";
-	var chart3;
+	var chart4;
 	$(document).ready(function () {
 		setDate();
 		refreshChart("All");
@@ -301,7 +331,7 @@
 	        endDate: end,
 	        maxDate : max,
 	        minDate : min,
-	        minYear : 2019,
+	        minYear : 2014,
 	        ranges: {
 	           'Today': [moment(), moment()],
 	           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
@@ -319,64 +349,66 @@
 	};
 	
 	$('#reportrange').on('apply.daterangepicker', function(ev, picker) {
-		chart3.destroy();
+		chart4.destroy();
 		product = document.getElementById("products");
 		product.selectedIndex = 0;
 		refreshChart("All");
 	});
 	
-	function subscriberDetails(product){
+	function countryDetails(product){
+		
 	    $.ajax({
 	        type: "GET",
 	        contentType: "application/json",
-	        url: "api/v1/subscriberDetails?toTime="+startDate+"&fromTime="+endDate+"&product="+product,
+	        url: "api/v1/country?toTime="+startDate+"&fromTime="+endDate+"&product="+product,
 	        dataType: 'json',
 	        cache: false,
 	        timeout: 600000,
 	        success: function (data1) {
+
+	        	if(typeof chart4 !== "undefined") {
+	    			chart4.destroy();
+	    		}
 	        	var labels = data1.map(function(e) {
-        		   return e.product ;
+        		   return e.product;
         		});
         		var data = data1.map(function(e) {
         		   return e.countSub;
-        		});
-	        	var ctx = document.getElementById('myChart3').getContext('2d');
-	        	ctx.canvas.parentNode.style.height = "400px";
-	        	var config = {
-  					   type: 'doughnut',
-  					   data: {
-  					      labels: labels,
-  					      datasets: [{
-  					         label: 'Company',
-  					         data: data,
-  					         backgroundColor: ['rgb(255, 218, 179)','rgb(255, 119, 51)','rgb(179, 60, 0)','rgb(240, 160, 31)',
-  					        	 'rgb(255, 85, 0)','rgb(255, 238, 230)','rgb(255, 150, 102)','rgb(255, 128, 0)','rgb(230, 115, 0)']
-  					      }]
-  					   },
-  					   options: {
-  						   legend: {
-  						    	display: true
-  						    }
-  							 ,
-  							 title: {
+        		});;
+    			var ctx = document.getElementById('myChart4').getContext('2d');
+    			ctx.canvas.parentNode.style.height = "400px";
+    			var config = {
+   					   type: 'pie',
+   					   data: {
+   					      labels: labels,
+   					      datasets: [{
+   					    	  
+   					         label: 'Number of Users / Country',
+   					         data: data,
+   					         backgroundColor: ['rgb(255, 218, 179)','rgb(255, 119, 51)','rgb(179, 60, 0)','rgb(240, 160, 31)',
+   					        	 'rgb(255, 85, 0)','rgb(255, 238, 230)','rgb(255, 150, 102)','rgb(255, 128, 0)','rgb(230, 115, 0)']		    					      }]
+   					   },
+   					   options: {
+   						   title: {
   						            display: true,
-  						            text: 'Number of Subscribers per Product',
+  						            text: 'Country/ No of Users',
 					             fontSize: 14
 
   						        },
-  				            responsive: true,
-  				            maintainAspectRatio: false
-  				            }
-  					};
-	        	
-	        	chart3 = new Chart(ctx, config);
+   						   legend: {
+   						    	display: true
+   						    },
+   				            responsive: true,
+   				            maintainAspectRatio: false
+   				       }
+    			};
+    			chart4 = new Chart(ctx, config);
 	        }
-	    })
+	    });
 	}
 
 	function refreshChart(product){
-		subscriberDetails(product);
+		countryDetails(product);
 	}
-	
 </script>
 </html>

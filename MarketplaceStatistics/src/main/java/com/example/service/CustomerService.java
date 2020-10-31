@@ -18,15 +18,21 @@ import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.dao.AzureFirstDAO;
+import com.example.dao.AzureSecondDAO;
+import com.example.dao.AzureThirdDAO;
 import com.example.dao.FirstDAO;
 import com.example.dao.FirstPartDAO;
 import com.example.dao.SecondDAO;
+import com.example.model.AzureFirst;
+import com.example.model.AzureSecond;
+import com.example.model.AzureThird;
 import com.example.model.CompanyData;
 import com.example.model.CountSubscribers;
 import com.example.model.First;
 import com.example.model.FirstPart;
-import com.example.model.RevenueData;
 import com.example.model.Second;
+import com.example.model.VisitsData;
 import com.google.gson.Gson;
 
 @Service
@@ -38,6 +44,12 @@ public class CustomerService {
 	private FirstPartDAO fpdto;
 	@Autowired
 	private SecondDAO sdto;
+	@Autowired
+	private AzureFirstDAO afdto;
+	@Autowired
+	private AzureSecondDAO asdto;
+	@Autowired
+	private AzureThirdDAO atdto;
 	
 	// function to parse the daily usage excel sheet, process the data and store it in h2 DB
 	public void saveFirst() {
@@ -165,6 +177,169 @@ public class CustomerService {
 		}
 	}
 	
+	public void saveAzureFirst() {
+		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+		Map<String,String> m=new HashMap<String,String>();
+		m.put("BDM VM IMAGE 10.2", "BDM");
+		m.put("BDM VM IMAGE 10.2.1", "BDM");
+		m.put("Big Data Management 10.1.1-UPDATE2 VM Image", "BDM");
+		m.put("Big Data Management 10.2 BYOL", "BDM");
+		m.put("DB VM IMAGE 10.2.2",	"DB");
+		m.put("EDC 10.2.2 HF1 DB VM ONLY", "EDC");
+		m.put("EDC VM IMAGE 10.2", "EDC");
+		m.put("EDC VM IMAGE 10.2.2", "EDC");
+		m.put("EDC VM IMAGE 10.2.2 HF1", "EDC");
+		m.put("ICS PAYG Windows", "ICS");
+		m.put("IDQ 10.1.1 HF2 VM Image Windows Server", "DQ");
+		m.put("IHS VM IMAGE 10.2.2", "IHS");
+		m.put("IICS RHEL LINUX BYOL", "IICS");
+		m.put("IICS WINDOWS BYOL", "IICS");
+		m.put("Informatica AXON 7", "AXON");
+		m.put("Informatica Data Accelerator for Azure - Win_BYOL", "IDA");
+		m.put("Informatica Data Accelerator for Azure_Ubuntu_BYOL", "IDA");
+		m.put("Informatica database", "DB");
+		m.put("Informatica Database 1041", "DB");
+		m.put("Informatica Intelligent Cloud Services Ubuntu-BYOL", "IICS");
+		m.put("Informatica Intelligent Cloud Services Win-BYOL", "IICS");
+		m.put("Informatica Server", "Server");
+		m.put("Informatica Server 1041", "Server");
+		m.put("Informatica Server for Windows",	"Server");
+		m.put("Informatica Windows 1041", "Windows");
+		m.put("PC 10.2 HF1 Domain VM Image RHEL", "PowerCenter");
+		m.put("PC 10.2 HF2 Domain VM Image RHEL", "PowerCenter");
+		m.put("PC 10.2 HF2 Domain VM Image WINDOWS", "PowerCenter");
+		m.put("SqlServer 2014 Image for PC & BDM solutions", "Server");
+		m.put("Australia", "AU");
+		m.put("Brazil",	"BR");
+		m.put("Bulgaria", "BG");
+		m.put("Canada",	"CA");
+		m.put("Finland", "FI");
+		m.put("France",	"FR");
+		m.put("Germany", "DE");
+		m.put("India", "IN");
+		m.put("Italy", "IT");
+		m.put("Netherlands", "NL");
+		m.put("Norway", "NO");
+		m.put("Pakistan", "PK");
+		m.put("Peru", "PE");
+		m.put("Qatar", "QA");
+		m.put("Romania", "RO");
+		m.put("Singapore", "SG");
+		m.put("Slovakia", "SK");
+		m.put("South Africa", "ZA");
+		m.put("Sweden",	"SE");
+		m.put("Switzerland", "CH");
+		m.put("Taiwan", "SY");
+		m.put("Thailand", "TH");
+		m.put("United Kingdom",	"GB");
+		m.put("United States", "US");
+
+
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Usage_Apr2020-Oct2020_20201006121913___10062020_0649hrs__fbc0345c-817e-4380-9caa-9d38924d3cfd.csv"));
+			CSVParser csvParser = new CSVParser(br,
+				    CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());
+			List<AzureFirst> azurefirst = new ArrayList<>();
+		    
+	        Iterable<CSVRecord> csvRecords = csvParser.getRecords();
+	        for (CSVRecord csvRecord : csvRecords) {
+	        	AzureFirst af=new AzureFirst();
+	        	af.setSubId(csvRecord.get("Marketplace Subscription Id"));
+	        	Date sd = format.parse(csvRecord.get("MonthStartDate"));
+	        	af.setStartDate(sd);
+	        	af.setSku(m.get(csvRecord.get("SKU")));
+	        	af.setCountry(m.get(csvRecord.get("Customer Country")));
+	        	Date ud = format.parse(csvRecord.get("Usage Date"));
+	        	af.setUsageDate(ud);
+	        	af.setUsage(Double.valueOf(csvRecord.get("NormalizedUsage")));
+	        	azurefirst.add(af);
+	        }
+	        afdto.saveAll(azurefirst);
+		} catch (IOException | ParseException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void saveAzureSecond() {
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Customer_Apr2020-Oct2020_20201006121944___10062020_0649hrs__c10f1c12-2a14-49e8-94df-e6cc668b555d.csv"));
+			CSVParser csvParser = new CSVParser(br,
+				    CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());
+			List<AzureSecond> azuresecond = new ArrayList<>();
+		    
+	        Iterable<CSVRecord> csvRecords = csvParser.getRecords();
+	        for (CSVRecord csvRecord : csvRecords) {
+	        	AzureSecond as=new AzureSecond();
+	        	as.setSubId(csvRecord.get("Marketplace Subscription Id"));
+	        	Date ad = format.parse(csvRecord.get("DateAcquired"));
+	        	as.setAcquiredDate(ad);
+	        	if(csvRecord.get("DateLost")=="") {
+	        		as.setLostDate(null);
+	        	} else {
+	        		Date ld = format.parse(csvRecord.get("DateLost"));
+	        		as.setLostDate(ld);
+	        	}
+	        	azuresecond.add(as);
+	        }
+	        asdto.saveAll(azuresecond);
+		} catch (IOException | ParseException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void saveAzureThird() {
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Map<String,String> m=new HashMap<String,String>();
+		m.put("annualiics", "IICS");
+		m.put("big-data-management-10-2-2-byol", "BDM");
+		m.put("big-data-management-byol", "BDM");
+		m.put("enterprise_data_catalog_10_2_2", "EDC");
+		m.put("enterprisedatacatalog_10_2_2_hf1", "EDC");
+		m.put("iics-winter", "IICS");
+		m.put("informaica-dei-1040", "DEI");
+		m.put("informaica-deq-1040", "DEQ");
+		m.put("informaica-deq-1041", "DEQ");
+		m.put("informaica-des-1040", "DES");
+		m.put("informaica-des-1041", "DES");
+		m.put("informaica-edc-1041", "EDC");
+		m.put("informaica-edp-1041", "EDP");
+		m.put("informatica-data-quality", "DQ");
+		m.put("informatica-dei-1041", "DEI");
+		m.put("informaticaedc1040",	"EDC");
+		m.put("informaticaedp1040",	"EDP");
+		m.put("informatica-idq-1040", "DQ");
+		m.put("informatica-idq-1041", "DQ");
+		m.put("powercenter", "PowerCenter");
+		m.put("powercenter-1040", "PowerCenter");
+		m.put("powercenter-1041", "PowerCenter");
+		
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Azure Marketplace___10062020_0706hrs__8ceb5fdd-5038-414a-8dfa-9484cefa5fbe.csv"));
+			CSVParser csvParser = new CSVParser(br,
+				    CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());
+			List<AzureThird> azurethird = new ArrayList<>();
+		    
+	        Iterable<CSVRecord> csvRecords = csvParser.getRecords();
+	        for (CSVRecord csvRecord : csvRecords) {
+	        	AzureThird at=new AzureThird();
+	        	Date d = format.parse(csvRecord.get("Date"));
+	        	at.setDate(d);
+	        	at.setSku(m.get(csvRecord.get("Offer Name")));
+	        	if(csvRecord.get("Country Name")=="") {
+	        		at.setCountry("Other");
+	        	} else {
+	        		at.setCountry(csvRecord.get("Country Name"));
+	        	}
+	        	at.setVisits(Integer.valueOf(csvRecord.get("Page Visits")));
+	        	azurethird.add(at);
+	        }
+	        atdto.saveAll(azurethird);
+		} catch (IOException | ParseException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	// fetching the data from the DB for Subscribers per product chart, converting it to json format and return
 	public String NumberOfSubscribers(String startDate, String endDate, String product) throws ParseException {
 		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
@@ -217,8 +392,10 @@ public class CustomerService {
 	
 	//fetching data from DB for Deployment Hours / Customers graph
 	public String CompanyData(String startDate, String endDate, String product) throws ParseException {
-		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+		Map<String,Map<String,Long>> m=new HashMap<>();
 		List<CompanyData> l = new ArrayList<>();
+		
+		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 		Date dd = format.parse(startDate);
 		Date dd1 = format.parse(endDate);
 		List<Object[]> list;
@@ -228,43 +405,39 @@ public class CustomerService {
 			list=fdto.findCompanyDetails(dd, dd1, product);
 		}
 		list.forEach(data->{
-			CompanyData cd=new CompanyData();
-			cd.setCompany((String)data[0]);
-			long temp=(Long)data[2];
-			int t=(int)temp;
-			switch((String)data[1]) {
-			   case "BDM" :
-				   cd.setBDMhours(t);
-					cd.setEDChours(0);
-					cd.setIICShours(0);
-					cd.setPChours(0);
-			      break;
-			   case "EDC" :
-				   cd.setBDMhours(0);
-					cd.setEDChours(t);
-					cd.setIICShours(0);
-					cd.setPChours(0);
-				   break;
-			   case "PowerCenter" :
-				   cd.setBDMhours(0);
-					cd.setEDChours(0);
-					cd.setIICShours(0);
-					cd.setPChours(t);
-				   break;
-			   case "IICS" :
-				   cd.setBDMhours(0);
-					cd.setEDChours(0);
-					cd.setIICShours(t);
-					cd.setPChours(0);
-				   break;	      
-			   default :
-				   cd.setBDMhours(0);
-					cd.setEDChours(0);
-					cd.setIICShours(0);
-					cd.setPChours(0);
-			}
-			l.add(cd);
+			String c = (String)data[0];
+			String p = (String)data[1];
+			Long u = (Long)data[2];
+			if (!m.containsKey(c)) {
+	            m.put(c, new HashMap<String,Long>());
+	        }
+	        m.get(c).put(p, u);
 		});
+		
+		for (Map.Entry<String,Map<String,Long>> entry : m.entrySet())  {
+			CompanyData cd=new CompanyData(new Long(0),new Long(0),new Long(0),new Long(0));
+			cd.setCompany(entry.getKey());
+			
+            for(Map.Entry<String,Long> e : entry.getValue().entrySet()) {
+            	switch(e.getKey()) {
+	 			   case "BDM" :
+	 				  cd.setBDM(e.getValue());
+	 			      break;
+	 			   case "EDC" :
+	 				   cd.setEDC(e.getValue());
+		 		      break;
+	 			   case "IICS" :
+	 				   cd.setIICS(e.getValue());
+	 				  break;
+	 			   case "PowerCenter" :
+	 				   cd.setPowerCenter(e.getValue());
+	 				  break;	      
+	 			   default :
+	 				   
+	 			}
+            }
+            l.add(cd);
+		}
 		
 		Gson json=new Gson();
 		String res=json.toJson(l);
@@ -405,4 +578,174 @@ public class CustomerService {
 		String res=json.toJson(list);
 		return res;
 	}*/
+	
+	//azure
+	
+	public String azurecustomerDetailsByDate(String startDate, String endDate, String product) throws ParseException {
+		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+		List<CountSubscribers> l=new ArrayList<>();
+		Date dd = format.parse(startDate);
+		Date dd1 = format.parse(endDate);
+		List<Object[]> list;
+		if(product.equals("All")) {
+			list = asdto.findAllSubscribersByDate(dd, dd1);
+		} else {
+			list = asdto.findSubscribersByDate(dd, dd1, product);
+		}
+		list.forEach(data->{
+			CountSubscribers cs=new CountSubscribers();
+			cs.setCountSub((Long)data[0]);
+			Integer m=(int)data[1];
+			Integer y=(int)data[2];
+			cs.setProduct(y.toString()+"-"+m.toString());
+			l.add(cs);
+		});
+		
+		Gson json=new Gson();
+		String res=json.toJson(l);
+		return res;
+	}
+	
+	public int azurecountSubscribers(String startDate, String endDate, String product) throws ParseException {
+		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+		Date dd = format.parse(startDate);
+		Date dd1 = format.parse(endDate);
+		int i;
+		if(product.equals("All")) {
+			i=(Integer)asdto.findAllcountSubscribers(dd, dd1);
+		} else {
+			i=(Integer)asdto.findcountSubscribers(dd, dd1, product);
+		}
+		return i;
+	}
+	
+	public int azurecountHours(String startDate, String endDate, String product) throws ParseException {
+		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+		Date dd = format.parse(startDate);
+		Date dd1 = format.parse(endDate);
+		int i;
+		if(product.equals("All")) {
+			i=(Integer)afdto.findAllcountHours(dd, dd1);
+		} else {
+			i=(Integer)afdto.findcountHours(dd, dd1, product);
+		}
+		return i;
+	}
+	
+	public String azureUsagePerProduct(String startDate, String endDate, String product) throws ParseException {
+		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+		List<CountSubscribers> l=new ArrayList<>();
+		Date dd = format.parse(startDate);
+		Date dd1 = format.parse(endDate);
+		List<Object[]> list;
+		if(product.equals("All")) {
+			list=afdto.findAllUsagePerProduct(dd, dd1);
+		}
+		else {
+			list=afdto.findUsagePerProduct(dd, dd1, product);
+		}
+		list.forEach(data->{
+			CountSubscribers cs=new CountSubscribers();
+			cs.setCountSub(Math.round((Double)data[0]));
+			cs.setProduct((String)data[1]);
+			l.add(cs);
+		});
+		
+		Gson json=new Gson();
+		String res=json.toJson(l);
+		return res;
+	}
+	
+	public String azurecountryDetails(String startDate, String endDate, String product) throws ParseException {
+		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+		List<CountSubscribers> l=new ArrayList<>();
+		Date dd = format.parse(startDate);
+		Date dd1 = format.parse(endDate);
+		List<Object[]> list;
+		if(product.equals("All")) {
+			list=afdto.findAllUsagePerCountry(dd, dd1);
+		}
+		else {
+			list=afdto.findUsagePerCountry(dd, dd1, product);
+		}
+		list.forEach(data->{
+			CountSubscribers cs=new CountSubscribers();
+			cs.setCountSub(Math.round((Double)data[0]));
+			cs.setProduct((String)data[1]);
+			l.add(cs);
+		});
+		
+		Gson json=new Gson();
+		String res=json.toJson(l);
+		return res;
+	}
+	
+	public String azureVisitsDetailsStacked(String startDate, String endDate, String product) throws ParseException {
+		Map<String,Map<String,Long>> m=new HashMap<>();
+		List<VisitsData> l=new ArrayList<>();
+		
+		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+		Date dd = format.parse(startDate);
+		Date dd1 = format.parse(endDate);
+		List<Object[]> list;
+		if(product.equals("All")) {
+			list=atdto.findAllVisitsDetails(dd, dd1);
+		} else {
+			list=atdto.findVisitsDetails(dd, dd1, product);
+		}
+		
+		list.forEach(data->{
+			String p = (String)data[0];
+			String c = (String)data[1];
+			Long v = (Long)data[2];
+			if (!m.containsKey(c)) {
+	            m.put(c, new HashMap<String,Long>());
+	        }
+	        m.get(c).put(p, v);
+		});
+		
+		for (Map.Entry<String,Map<String,Long>> entry : m.entrySet())  {
+			VisitsData vd=new VisitsData(new Long(0),new Long(0),new Long(0),new Long(0),new Long(0),new Long(0),new Long(0),new Long(0),new Long(0));
+			vd.setCompany(entry.getKey());
+			
+            for(Map.Entry<String,Long> e : entry.getValue().entrySet()) {
+            	switch(e.getKey()) {
+	 			   case "BDM" :
+	 				  vd.setBDM(e.getValue());
+	 			      break;
+	 			   case "DEI" :
+	 				  vd.setDEI(e.getValue());
+		 			  break;
+	 			   case "DEQ" :
+	 				   vd.setDEQ(e.getValue());
+		 			  break;
+	 			   case "DES" :
+	 				   vd.setDES(e.getValue());
+		 			  break;
+	 			   case "DQ" :
+	 				   vd.setDQ(e.getValue());
+	 				  break;
+	 			   case "EDC" :
+	 				   vd.setEDC(e.getValue());
+		 		      break;
+	 			   case "EDP" :
+	 				   vd.setEDP(e.getValue());
+	 			      break;
+	 			   case "IICS" :
+	 				   vd.setIICS(e.getValue());
+	 				  break;
+	 			   case "PowerCenter" :
+	 				   vd.setPowerCenter(e.getValue());
+	 				  break;	      
+	 			   default :
+
+	 			}
+            }
+            l.add(vd);
+		}
+
+		Gson json=new Gson();
+		String res=json.toJson(l);
+		return res;
+	}
 }

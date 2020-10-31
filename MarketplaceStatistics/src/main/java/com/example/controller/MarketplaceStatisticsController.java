@@ -21,31 +21,6 @@ public class MarketplaceStatisticsController {
 		return "index.jsp";
 	}
 	
-	@RequestMapping("/first")
-	public String showFirst() throws ParseException {
-		return "first.jsp";
-	}
-	
-	@RequestMapping("/second")
-	public String showSecond() throws ParseException {
-		return "second.jsp";
-	}
-	
-	@RequestMapping("/third")
-	public String showThird() throws ParseException {
-		return "third.jsp";
-	}
-	
-	@RequestMapping("/fourth")
-	public String showFourth() throws ParseException {
-		return "fourth.jsp";
-	}
-	
-	@RequestMapping("/fifth")
-	public String showFifth() throws ParseException {
-		return "fifth.jsp";
-	}
-	
 	// ajax request handled for Subscribers per product chart 
 	@RequestMapping("api/v1/subscriberDetails")
 	@ResponseBody
@@ -122,4 +97,48 @@ public class MarketplaceStatisticsController {
 			@RequestParam(value="fromTime") String endDate, @RequestParam(value="product") String product) throws ParseException {
 			return cs.instanceperproduct(startDate, endDate, product);
 	}*/
+	
+	//azure
+	
+	@RequestMapping("api/v1/azure/customerDetailsByDate")
+	@ResponseBody
+	public String azurecustomerDetailsByDate(Model model, @RequestParam(value="toTime") String startDate,
+			@RequestParam(value="fromTime") String endDate, @RequestParam(value="product") String product) throws ParseException {
+		return cs.azurecustomerDetailsByDate(startDate, endDate, product);
+	}
+	
+	@RequestMapping("api/v1/azure/countSubscribers")
+	@ResponseBody
+	public int azurecountSubscribers(Model model, @RequestParam(value="toTime") String startDate,
+			@RequestParam(value="fromTime") String endDate, @RequestParam(value="product") String product) throws ParseException {
+		return cs.azurecountSubscribers(startDate, endDate, product);
+	}
+	
+	@RequestMapping("api/v1/azure/countHours")
+	@ResponseBody
+	public int azurecountHours(Model model, @RequestParam(value="toTime") String startDate,
+			@RequestParam(value="fromTime") String endDate, @RequestParam(value="product") String product) throws ParseException {
+		return cs.azurecountHours(startDate, endDate, product);
+	}
+	
+	@RequestMapping("api/v1/azure/customerDetails")
+	@ResponseBody
+	public String azureUsagePerProduct(Model model, @RequestParam(value="toTime") String startDate,
+			@RequestParam(value="fromTime") String endDate, @RequestParam(value="product") String product) throws ParseException {
+		return cs.azureUsagePerProduct(startDate, endDate, product);
+	}
+	
+	@RequestMapping("api/v1/azure/country")
+	@ResponseBody
+	public String azurecountryDetails(Model model, @RequestParam(value="toTime") String startDate,
+			@RequestParam(value="fromTime") String endDate, @RequestParam(value="product") String product) throws ParseException {
+		return cs.azurecountryDetails(startDate, endDate, product);
+	}
+	
+	@RequestMapping("api/v1/azure/customerDetailsStacked")
+	@ResponseBody
+	public String azureVisitsDetailsStacked(Model model, @RequestParam(value="toTime") String startDate,
+			@RequestParam(value="fromTime") String endDate, @RequestParam(value="product") String product) throws ParseException {
+		return cs.azureVisitsDetailsStacked(startDate, endDate, product);
+	}
 }

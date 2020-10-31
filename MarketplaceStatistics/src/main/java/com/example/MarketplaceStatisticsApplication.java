@@ -18,6 +18,9 @@ public class MarketplaceStatisticsApplication implements CommandLineRunner{
 		cs.saveFirst();
 		cs.saveSecond();
 		cs.saveFirstPart();
+		cs.saveAzureFirst();
+		cs.saveAzureSecond();
+		cs.saveAzureThird();
 	}
 
 	public static void main(String[] args) {

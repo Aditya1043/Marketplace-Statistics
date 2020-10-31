@@ -2,43 +2,45 @@ package com.example.model;
 
 public class CompanyData {
 	private String company;
-	private int BDMhours;
-	private int EDChours;
-	private int PChours;
-	private int IICShours;
+	private Long BDM;
+	private Long EDC;
+	private Long IICS;
+	private Long PowerCenter;
+	public CompanyData(Long bDM, Long eDC, Long iICS, Long powerCenter) {
+		super();
+		BDM = bDM;
+		EDC = eDC;
+		IICS = iICS;
+		PowerCenter = powerCenter;
+	}
 	public String getCompany() {
 		return company;
 	}
 	public void setCompany(String company) {
 		this.company = company;
 	}
-	public int getBDMhours() {
-		return BDMhours;
+	public Long getBDM() {
+		return BDM;
 	}
-	public void setBDMhours(int bDMhours) {
-		BDMhours = bDMhours;
+	public void setBDM(Long bDM) {
+		BDM = bDM;
 	}
-	public int getEDChours() {
-		return EDChours;
+	public Long getEDC() {
+		return EDC;
 	}
-	public void setEDChours(int eDChours) {
-		EDChours = eDChours;
+	public void setEDC(Long eDC) {
+		EDC = eDC;
 	}
-	public int getPChours() {
-		return PChours;
+	public Long getIICS() {
+		return IICS;
 	}
-	public void setPChours(int pChours) {
-		PChours = pChours;
+	public void setIICS(Long iICS) {
+		IICS = iICS;
 	}
-	public int getIICShours() {
-		return IICShours;
+	public Long getPowerCenter() {
+		return PowerCenter;
 	}
-	public void setIICShours(int iICShours) {
-		IICShours = iICShours;
-	}
-	@Override
-	public String toString() {
-		return "CompanyData [company=" + company + ", BDMhours=" + BDMhours + ", EDChours=" + EDChours + ", PChours="
-				+ PChours + ", IICShours=" + IICShours + "]";
+	public void setPowerCenter(Long powerCenter) {
+		PowerCenter = powerCenter;
 	}
 }

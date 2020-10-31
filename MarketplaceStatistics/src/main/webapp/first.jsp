@@ -154,62 +154,88 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
+     <!-- Nav Item - AWS Collapse Menu -->
+     <div class="sidebar-heading">
+        Amazon Web Service
+      </div>
      
-
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Nav Item - New Subscribers -->
-      <li class="nav-item active">
+      <li class="nav-item">
+        <a class="nav-link" href="aws.jsp">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Main AWS Dashboard</span></a>
+      </li>
+       <li class="nav-item">
         <a class="nav-link" href="first.jsp">
           <i class="fas fa-fw fa-chart-area"></i>
-          <span>Monthly new subscribers</span></a>
+          <span>Monthly New Subscribers</span></a>
       </li>
-        
-         <!-- Divider -->
-      <hr class="sidebar-divider">
-        
-        <!-- Nav Item - Hours of Deployment -->
-      <li class="nav-item active">
+       <li class="nav-item">
         <a class="nav-link" href="second.jsp">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Hours of Deployment</span></a>
       </li>
-        
-         <!-- Divider -->
-      <hr class="sidebar-divider">
-        
-        <!-- Nav Item - Subscribers per product -->
-      <li class="nav-item active">
-        <a class="nav-link" href="fourth.jsp">
+       <li class="nav-item">
+        <a class="nav-link" href="third.jsp">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Subscribers per Product</span></a>
       </li>
-        
-         <!-- Divider -->
-      <hr class="sidebar-divider">
-        
-        <!-- Nav Item - Customers per Country -->
-      <li class="nav-item active">
+       <li class="nav-item">
+        <a class="nav-link" href="fourth.jsp">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Usage units/Country</span></a>
+      </li>
+       <li class="nav-item">
         <a class="nav-link" href="fifth.jsp">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Deployment hours per customer</span></a>
+      </li>
+      
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+  
+       <!-- Nav Item - Azure Collapse Menu -->
+       
+             <!-- Nav Item - Dashboard -->
+     <!-- Nav Item - AWS Collapse Menu -->
+     <div class="sidebar-heading">
+        Azure
+      </div>
+     
+      <li class="nav-item">
+        <a class="nav-link" href="azure.jsp">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Main Azure Dashboard</span></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="firstaz.jsp">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Monthly New Subscribers</span></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="secondaz.jsp">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Usage Trends</span></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="thirdaz.jsp">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Usage units / Product</span></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="fourthaz.jsp">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Usage Units / Country</span></a>
       </li>
-        
-         <!-- Divider -->
-      <hr class="sidebar-divider">
-        
-        <!-- Nav Item - Deployment hours per customer -->
-      <li class="nav-item active">
-        <a class="nav-link" href="third.jsp">
+       <li class="nav-item">
+        <a class="nav-link" href="fifthaz.jsp">
           <i class="fas fa-fw fa-chart-area"></i>
-          <span>Deployment hours per Customer</span></a>
+          <span>Visits per Country</span></a>
       </li>
-        
-         <!-- Divider -->
+      
+      <!-- Divider -->
       <hr class="sidebar-divider">
-  
-
+       
+     
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -459,6 +485,20 @@
 	        	if(typeof chart1 !== "undefined") {
 	    			chart1.destroy();
 	    		}
+	        	
+	        	data1.sort((a, b) => {
+	        	    let fa = a.product,
+	        	        fb = b.product;
+
+	        	    if (fa < fb) {
+	        	        return -1;
+	        	    }
+	        	    if (fa > fb) {
+	        	        return 1;
+	        	    }
+	        	    return 0;
+	        	});
+	        	
 	        	function newDateMoment(date) {
 				  	return moment(date).format('MMMM YYYY');
 				}
